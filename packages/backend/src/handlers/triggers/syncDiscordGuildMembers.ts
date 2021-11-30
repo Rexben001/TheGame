@@ -66,8 +66,8 @@ export const syncDiscordGuildMembers = async (
       id: guild.id,
     });
     const guildMemberDiscordIds = getGuildMembersResponse.guild[0].guild_players
-      .filter((p) => p.Player.discord_id != null)
-      .map((p) => p.Player.discord_id) as string[];
+      .filter(({ Player: { discordId } }) => discordId != null)
+      .map(({ Player: { discordId } }) => discordId) as string[];
 
     await discordGuild.members.fetch();
 
