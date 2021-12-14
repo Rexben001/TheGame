@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from '@metafam/ds';
-import { Constants, generateUuid } from '@metafam/utils';
+import { Constants, generateUUID } from '@metafam/utils';
 import { FlexContainer } from 'components/Container';
 import { MetaLink } from 'components/Link';
 import { CONFIG } from 'config';
@@ -28,7 +28,7 @@ export const GuildJoin: React.FC = () => {
   useEffect(() => {
     let guid = get(discordAuthStateGuidKey);
     if (guid == null) {
-      guid = generateUuid();
+      guid = generateUUID();
       set(discordAuthStateGuidKey, guid);
     }
     setStateGuid(guid);
