@@ -9,7 +9,6 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next';
-import Error from 'next/error';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { BOX_TYPE } from 'utils/boxTypes';
@@ -29,6 +28,7 @@ import { PlayerRoles } from '../../components/Player/Section/PlayerRoles';
 import { PlayerSkills } from '../../components/Player/Section/PlayerSkills';
 import { PlayerType } from '../../components/Player/Section/PlayerType';
 import { HeadComponent } from '../../components/Seo';
+import Page404 from '../404';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -78,7 +78,7 @@ const PlayerPage: React.FC<Props> = ({ player }) => {
   }
 
   if (!player) {
-    return <Error statusCode={404} />;
+    return <Page404 />;
   }
 
   const addBox = (column: number, name: string) => {
@@ -300,7 +300,7 @@ export const getStaticPaths: GetStaticPaths<QueryParams> = async () => {
     paths: playerUsernames.map((username) => ({
       params: { username },
     })),
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -334,6 +334,7 @@ export const getStaticProps = async (
     props: {
       player: player || null, // must be serializable
       key: username,
+      hideTopMenu: !player,
     },
     revalidate: 1,
   };
