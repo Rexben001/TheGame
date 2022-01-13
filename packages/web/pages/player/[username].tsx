@@ -300,7 +300,7 @@ export const getStaticPaths: GetStaticPaths<QueryParams> = async () => {
     paths: playerUsernames.map((username) => ({
       params: { username },
     })),
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
